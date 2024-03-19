@@ -14,15 +14,21 @@ const sampleDataForPhotoListItem = {
   profile: `${process.env.PUBLIC_URL}/profile-1.jpg`,
 };
 
-const PhotoListItem = ({ id, location, imageSource, username, profile }) => {
+const PhotoListItem = (props) => {
+  const { imageSource, profile, username, location } = props.data;
+
   return (
     <div className="photo-list__item">
-      <img src={imageSource} alt={`Photo by ${username}`} />
+      <img className="photo-list__image" src={imageSource} alt="Image"></img>
       <div className="photo-list__user-details">
-        <img src={profile} alt={`Profile of ${username}`} className="profile-pic" />
-        <div className="photo-list__user-info">{username}</div>
+        <img className="photo-list__user-profile" src={profile} alt={`Profile Image for ${username}`}></img>
+        <div className="photo-list__user-info">
+          <span>{username}</span>
+          <div className="photo-list__user-location">
+            {location.city}, {location.country}
+          </div>
+        </div>
       </div>
-      <div className="photo-list__user-location">{location.city}, {location.country}</div>
     </div>
   );
 };
