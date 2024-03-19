@@ -16,13 +16,13 @@ const sampleDataForPhotoListItem = {
 
 const PhotoListItem = ({ id, location, imageSource, username, profile }) => {
   return (
-    <div className="photo-list-item">
+    <div className="photo-list__item">
       <img src={imageSource} alt={`Photo by ${username}`} />
-      <div className="user-details">
+      <div className="photo-list__user-details">
         <img src={profile} alt={`Profile of ${username}`} className="profile-pic" />
-        <div className="username">{username}</div>
+        <div className="photo-list__user-info">{username}</div>
       </div>
-      <div className="location">{location.city}, {location.country}</div>
+      <div className="photo-list__user-location">{location.city}, {location.country}</div>
     </div>
   );
 };
