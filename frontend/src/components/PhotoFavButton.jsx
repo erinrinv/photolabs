@@ -5,14 +5,10 @@ import FavIcon from './FavIcon';
 import '../styles/PhotoFavButton.scss';
 
 function PhotoFavButton() {
-  const [like, setLike] = useState('');
+  const [like, setLike] = useState(false);
 
   const handleClick = () => {
-    if (like) {
-      setLike('');
-    } else {
-      setLike('true');
-    }
+    setLike(prevLike => !prevLike);
   };
 
 
