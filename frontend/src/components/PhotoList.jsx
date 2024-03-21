@@ -2,14 +2,13 @@ import React from "react";
 
 
 import PhotoListItem from "./PhotoListItem";
-import photos from "mocks/photos";
 
 import "../styles/PhotoList.scss";
 
-const PhotoList = () => {
+const PhotoList = ({ isLiked, toggleLike, photos }) => {
   const photoList = photos.map(photo => {
     return (
-      <PhotoListItem data={photo} key={photo.id}/>
+      <PhotoListItem key={photo.id} isLiked={isLiked} toggleLike={toggleLike} photoId={photo.id} data={photo} />
     );
   });
 
