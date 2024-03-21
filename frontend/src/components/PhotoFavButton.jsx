@@ -1,9 +1,5 @@
-
 import React from 'react';
-
 import FavIcon from './FavIcon';
-
-
 import '../styles/PhotoFavButton.scss';
 
 function PhotoFavButton({ isLiked, toggleLike, photoId }) {
@@ -14,6 +10,6 @@ function PhotoFavButton({ isLiked, toggleLike, photoId }) {
       </div>
     </div>
   );
-};
+}
 
 export default PhotoFavButton;
