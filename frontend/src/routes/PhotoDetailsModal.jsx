@@ -27,10 +27,11 @@ const PhotoDetailsModal = ({ isLiked, toggleLike, hideModal, selectedPhoto }) =>
           </div>
         </div>
         <p className='photo-details-modal__header'>Similar Photos</p>
-      </div>
-      <div className='photo-details-modal__top-bar'>
+        <div className='photo-details-modal__top-bar'>
         <PhotoList isLiked={isLiked} toggleLike={toggleLike} photos={similar_photos}/>
       </div>
+</div>
+      
     </div>
   );
 };
