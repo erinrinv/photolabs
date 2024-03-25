@@ -6,8 +6,8 @@ The PhotoLabs project for the Web Development React course programming.
 
 # Screenshots
 
-!["Main Page"]()
-!["responsive design"]()
+!["Main Page"](https://github.com/erinrinv/photolabs/blob/main/docs/mainpage.jpg)
+!["responsive design"](https://github.com/erinrinv/photolabs/blob/main/docs/example%20photo.jpg)
 
 ## Setup
 
