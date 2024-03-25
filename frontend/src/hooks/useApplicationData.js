@@ -6,7 +6,8 @@ const INITIAL_STATE = {
   selectedTopic: null,
   modal: false,
   photoData: [],
-  topicData: []
+  topicData: [],
+  dark: ''
 };
 
 const ACTIONS = {
@@ -15,9 +16,12 @@ const ACTIONS = {
   SELECT_TOPIC: 'SELECT_TOPIC',
   CLOSE_PHOTO: 'CLOSE_PHOTO',
   SET_PHOTO_DATA: 'SET_PHOTO_DATA',
-  SET_TOPIC_DATA: 'SET_TOPIC_DATA'
+  SET_TOPIC_DATA: 'SET_TOPIC_DATA',
+  TOGGLE_DARK_MODE: 'TOGGLE_DARK_MODE'
 };
 
+// function to specify how state is updated
+// returns updated state
 const reducer = (state, action) => {
   switch (action.type) {
     case ACTIONS.TOGGLE_LIKE:
@@ -42,11 +46,19 @@ const reducer = (state, action) => {
     case ACTIONS.SET_TOPIC_DATA:
       return { ...state, topicData: action.payload };
 
+    case ACTIONS.TOGGLE_DARK_MODE:
+      if (state.dark === 'dark') {
+        return { ...state, dark: '' };
+      }
+      return { ...state, dark: 'dark' };
+
     default:
       throw new Error(`Tried to reduce with unsupported action type: ${action.type}`);
   }
 };
 
+
+// returns state and functions needed for application
 export const useApplicationData = () => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
 
@@ -58,18 +70,28 @@ export const useApplicationData = () => {
 
   const onClosePhotoDetailsModal = () => dispatch({ type: ACTIONS.CLOSE_PHOTO });
 
-  useEffect(() => {
+  const setDark = () => dispatch({ type: ACTIONS.TOGGLE_DARK_MODE });
+
+  
+  const getAllPhotos = () => {
     fetch(`/api/photos`)
       .then(res => res.json())
       .then(photoData => dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: photoData }));
+  };
+
+  // fetch all photos on intial render
+  useEffect(() => {
+    getAllPhotos();
   }, []);
 
+  // fetch all topics
   useEffect(() => {
     fetch(`/api/topics`)
       .then(res => res.json())
       .then(topicData => dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: topicData }));
   }, []);
 
+  // fetch photos based on topic
   useEffect(() => {
     if (state.selectedTopic) {
       fetch(`/api/topics/photos/${state.selectedTopic}`)
@@ -83,6 +105,8 @@ export const useApplicationData = () => {
     updateToFavPhotoIds,
     setPhotoSelected,
     getPhotosByTopic,
-    onClosePhotoDetailsModal
+    getAllPhotos,
+    onClosePhotoDetailsModal,
+    setDark
   };
 };
